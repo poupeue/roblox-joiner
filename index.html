@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joining Roblox Server...</title>
-    <link rel="icon" href="https://media.discordapp.net/attachments/1276618605215219722/1370449278857641994/peteware.png?ex=681f89d9&is=681e3859&hm=c0c15dabfe3784d450372894d77b80f57d56fc28427f2261d92f425b5a606e6a&=&format=webp&quality=lossless&width=540&height=606" type="image/png">
+    <link rel="icon" href="https://example.com/your-icon.png" type="image/png">
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const placeId = urlParams.get("placeId");
@@ -22,7 +22,6 @@
         document.addEventListener('visibilitychange', function() {
           if (document.visibilityState === 'hidden') {
             opened = true;
-            window.close();
           }
         });
       }
@@ -31,15 +30,21 @@
   <body>
     <h3>Joining Roblox server...</h3>
     <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
-    <p id="fallback" style="display:none;">Failed to join the Roblox server. You can <a href="" id="fallback-link" target="_blank">click here</a> to join the game.</p>
+    <p id="fallback" style="display:none;">
+      Failed to join the Roblox server. You can <a href="" id="fallback-link" target="_blank">click here</a> to join the game.
+    </p>
+    <p id="fallback-button" style="display:none;">
+      <button onclick="window.location.href = fallbackUrl;">Join Game</button>
+    </p>
     <script>
       const link = document.getElementById("link");
       link.href = fallbackUrl;
       const fallbackLink = document.getElementById("fallback-link");
       fallbackLink.href = fallbackUrl;
+      const fallbackButton = document.getElementById("fallback-button");
       setTimeout(() => {
-        window.close();
-      }, 5000);
+        fallbackButton.style.display = 'block';
+      }, 3000);
     </script>
   </body>
 </html>
