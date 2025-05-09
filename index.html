@@ -33,7 +33,10 @@
     <p id="fallback" style="display:none;">
       Failed to join the Roblox server. You can <a href="" id="fallback-link" target="_blank">click here</a> to join the game.
     </p>
-    <p id="fallback-button" style="display:none;">
+    <p>
+      If nothing happens, click the button below to join:
+    </p>
+    <p>
       <button onclick="window.location.href = fallbackUrl;">Join Game</button>
     </p>
     <script>
@@ -41,10 +44,6 @@
       link.href = fallbackUrl;
       const fallbackLink = document.getElementById("fallback-link");
       fallbackLink.href = fallbackUrl;
-      const fallbackButton = document.getElementById("fallback-button");
-      setTimeout(() => {
-        fallbackButton.style.display = 'block';
-      }, 3000);
     </script>
   </body>
 </html>
