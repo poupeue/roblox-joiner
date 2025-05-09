@@ -1,29 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Joining Roblox Server...</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joining Roblox Server...</title>
+    <link rel="icon" href="https://media.discordapp.net/attachments/1276618605215219722/1370449278857641994/peteware.png?ex=681f89d9&is=681e3859&hm=c0c15dabfe3784d450372894d77b80f57d56fc28427f2261d92f425b5a606e6a&=&format=webp&quality=lossless&width=540&height=606" type="image/png">
     <script>
-      // Parse the URL query parameters
       const urlParams = new URLSearchParams(window.location.search);
       const placeId = urlParams.get("placeId");
       const jobId = urlParams.get("jobId");
-
-      // Build roblox:// URL
       const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
-
-      // Attempt redirect immediately
+      const fallbackUrl = `https://www.roblox.com/games/${placeId}`;
+      let opened = false;
       if (placeId && jobId) {
         window.location.href = robloxUrl;
+        setTimeout(() => {
+          if (!opened) {
+            document.getElementById('fallback').style.display = 'block';
+          }
+        }, 3000);
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'hidden') {
+            opened = true;
+            window.close();
+          }
+        });
       }
     </script>
   </head>
   <body>
-    <p>Joining Roblox server... If not redirected, <a id="link" href="#">click here</a>.</p>
+    <h3>Joining Roblox server...</h3>
+    <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
+    <p id="fallback" style="display:none;">Failed to join the Roblox server. You can <a href="" id="fallback-link" target="_blank">click here</a> to join the game.</p>
     <script>
-      // Fallback link in case redirect fails
       const link = document.getElementById("link");
-      link.href = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
+      link.href = fallbackUrl;
+      const fallbackLink = document.getElementById("fallback-link");
+      fallbackLink.href = fallbackUrl;
+      setTimeout(() => {
+        window.close();
+      }, 5000);
     </script>
   </body>
 </html>
