@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Joining Roblox Server...</title>
+    <meta charset="UTF-8">
+    <script>
+      // Parse the URL query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const placeId = urlParams.get("placeId");
+      const jobId = urlParams.get("jobId");
+
+      // Build roblox:// URL
+      const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
+
+      // Attempt redirect immediately
+      if (placeId && jobId) {
+        window.location.href = robloxUrl;
+      }
+    </script>
+  </head>
+  <body>
+    <p>Joining Roblox server... If not redirected, <a id="link" href="#">click here</a>.</p>
+    <script>
+      // Fallback link in case redirect fails
+      const link = document.getElementById("link");
+      link.href = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
+    </script>
+  </body>
+</html>
