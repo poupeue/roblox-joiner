@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Roblox...</title>
-    <link rel="icon" href="https://www.roblox.com/favicon.ico" type="image/x-icon">
-    <script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to Roblox...</title>
+  <link rel="icon" href="https://www.roblox.com/favicon.ico" type="image/x-icon">
+  <script>
+    // Declare globally so both scripts can access
+    let placeId, jobId, robloxUrl, fallbackUrl;
+
+    window.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const placeId = urlParams.get("placeId");
-      const jobId = urlParams.get("jobId");
-      const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
-      const fallbackUrl = `https://www.roblox.com/games/${placeId}`;
+      placeId = urlParams.get("placeId");
+      jobId = urlParams.get("jobId");
 
       if (placeId && jobId) {
+        robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
+        fallbackUrl = `https://www.roblox.com/games/${placeId}`;
+
+        // Set fallback link
+        document.getElementById("link").href = fallbackUrl;
+        document.getElementById("join-btn").onclick = () => {
+          window.location.href = robloxUrl;
+        };
+
+        // Try opening the Roblox app
         window.location.href = robloxUrl;
+      } else {
+        // If missing data, hide the button and show an error
+        document.getElementById("error").textContent = "Missing placeId or jobId.";
+        document.getElementById("join-btn").style.display = "none";
       }
-    </script>
-  </head>
-  <body>
-    <h3>Redirecting to Roblox...</h3>
-    <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
-    <p>If nothing happens, click the button below to join:</p>
-    <p>
-      <button onclick="window.location.href = 'https://www.roblox.com/games/' + placeId;">Join Game</button>
-    </p>
-    <script>
-      const link = document.getElementById("link");
-      link.href = `https://www.roblox.com/games/${placeId}`;
-    </script>
-  </body>
+    });
+  </script>
+</head>
+<body>
+  <h3>Redirecting to Roblox...</h3>
+  <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
+  <p>If nothing happens, click the button below to join:</p>
+  <p>
+    <button id="join-btn">Join Game</button>
+  </p>
+  <p id="error" style="color: red;"></p>
+</body>
 </html>
