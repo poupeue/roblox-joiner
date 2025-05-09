@@ -11,7 +11,7 @@
       const jobId = urlParams.get("jobId");
       const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
       const fallbackUrl = `https://www.roblox.com/games/${placeId}`;
-      
+
       if (placeId && jobId) {
         window.location.href = robloxUrl;
       }
@@ -22,11 +22,11 @@
     <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
     <p>If nothing happens, click the button below to join:</p>
     <p>
-      <button onclick="window.location.href = fallbackUrl;">Join Game</button>
+      <button onclick="window.location.href = 'https://www.roblox.com/games/' + placeId;">Join Game</button>
     </p>
     <script>
       const link = document.getElementById("link");
-      link.href = fallbackUrl;
+      link.href = `https://www.roblox.com/games/${placeId}`;
     </script>
   </body>
 </html>
