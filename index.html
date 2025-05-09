@@ -3,47 +3,30 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joining Roblox Server...</title>
-    <link rel="icon" href="https://example.com/your-icon.png" type="image/png">
+    <title>Redirecting to Roblox...</title>
+    <link rel="icon" href="https://www.roblox.com/favicon.ico" type="image/x-icon">
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const placeId = urlParams.get("placeId");
       const jobId = urlParams.get("jobId");
       const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
       const fallbackUrl = `https://www.roblox.com/games/${placeId}`;
-      let opened = false;
+      
       if (placeId && jobId) {
         window.location.href = robloxUrl;
-        setTimeout(() => {
-          if (!opened) {
-            document.getElementById('fallback').style.display = 'block';
-          }
-        }, 3000);
-        document.addEventListener('visibilitychange', function() {
-          if (document.visibilityState === 'hidden') {
-            opened = true;
-          }
-        });
       }
     </script>
   </head>
   <body>
-    <h3>Joining Roblox server...</h3>
+    <h3>Redirecting to Roblox...</h3>
     <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
-    <p id="fallback" style="display:none;">
-      Failed to join the Roblox server. You can <a href="" id="fallback-link" target="_blank">click here</a> to join the game.
-    </p>
-    <p>
-      If nothing happens, click the button below to join:
-    </p>
+    <p>If nothing happens, click the button below to join:</p>
     <p>
       <button onclick="window.location.href = fallbackUrl;">Join Game</button>
     </p>
     <script>
       const link = document.getElementById("link");
       link.href = fallbackUrl;
-      const fallbackLink = document.getElementById("fallback-link");
-      fallbackLink.href = fallbackUrl;
     </script>
   </body>
 </html>
