@@ -6,8 +6,7 @@
   <title>Redirecting to Roblox...</title>
   <link rel="icon" href="https://www.roblox.com/favicon.ico" type="image/x-icon">
   <script>
-    // Declare globally so both scripts can access
-    let placeId, jobId, robloxUrl, fallbackUrl;
+    let placeId, jobId, robloxUrl;
 
     window.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -16,18 +15,12 @@
 
       if (placeId && jobId) {
         robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
-        fallbackUrl = `https://www.roblox.com/games/${placeId}`;
-
-        // Set fallback link
-        document.getElementById("link").href = fallbackUrl;
         document.getElementById("join-btn").onclick = () => {
           window.location.href = robloxUrl;
         };
 
-        // Try opening the Roblox app
         window.location.href = robloxUrl;
       } else {
-        // If missing data, hide the button and show an error
         document.getElementById("error").textContent = "Missing placeId or jobId.";
         document.getElementById("join-btn").style.display = "none";
       }
@@ -36,7 +29,6 @@
 </head>
 <body>
   <h3>Redirecting to Roblox...</h3>
-  <p>If you are not redirected automatically, <a id="link" href="#">click here</a>.</p>
   <p>If nothing happens, click the button below to join:</p>
   <p>
     <button id="join-btn">Join Game</button>
